@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+  </head>
+<body>
+	<h1>Simple Docker Tutorial</h1>
+	<p>How to transfer a docker container configured to run my HBC web app to a ubuntu Amazon EC2 Instance</p>
+	<hr>
+	<h3>Transferring the Docker Container to the Instance</h3>
+	<p>Note, there is no real benefit to using Docker for my HBC web app since the application environment is very simple. However, I thought it might be useful to get familiar with Docker and the general idea of Linux containers for future purposes.</p>
+	<ol>
+	<li>Create the initial docker container using a standard Ubuntu image "ubuntu". I mapped my computer's home directory to the root directory of the instance. <br>
+		<code>docker run -it --name initial -v ~:/root ubuntu</code>
+	</li>
+	<li>Start container. <br>
+		<code>docker start -i initial</code>
+	</li>
+	<li>Install dependencies in the container necessary to run the application and exit the container.</li>
+	<li>Convert container to image. (Here I've given the image the name "hbc_app") <br>
+		<code>docker commit -m "message" CONTAINER_ID hbc_app</code></li>
+	<li>Save the docker image. I have saved the file with name "hbc_web.dk" in the same directory. The file extension does not matter but it is typically a .tar file. <br>
+		<code>docker save -o hbc_web.dk hbc_app</code>
+	</li>
+	<li>Secure copy image to the Amazon EWS instance. The name of the SSH key is "key.pem" and the last argument is the target host. <br>
+		<code>scp -i ~/ssh/key.pem hbc_web.dk ubuntu@ec2-34-207-173-18.compute-1.amazonaws.com</code>
+	</li>
+	<li>Load the Docker file.<br>
+		<code>docker load -i hbc_web.dk</code>
+	</li>
+	</ol>
+
+	<h3>Creating the Container on the Instance</h3>
+	<p>Now, you have a docker image on the AWS instance, which you can view with the command <code>docker images</code></p>
+	<p>Once connected to the Instance, 
+	<ol>
+	<li>Add the app code to the root directory.</li>
+	<li>Create a docker container from the image, mapping the volume to the root directory and mapping the port 5001 on my localhost where the Flask app runs to the port 5001 on the instance host.<br>
+	<code>docker run -it --name <container_name> -v ~:/root -p 5001:5001 <image_name> bash </image_name> </code></li>
+	<li>Start the container and run the app.</li>
+	</ol>
+</body>
+</html>
+
