@@ -113,9 +113,39 @@
                 <div class="tab-pane fade" id="projects">
                   <div class="col-sm-3" >
                     <ul class="nav nav-pills nav-stacked">
-                      <li class="active"><a href="#datamatch" data-toggle="tab">Automatic Scheduler</a></li>
-                      <li> <a href="#rooted" data-toggle="tab">Matrix Factorization</a></li>
+                      <li class="active"><a href="#hbc" data-toggle="tab">Automatic Scheduler</a></li>
+                      <li> <a href="#cs109" data-toggle="tab">Parallelized Matrix Factorization</a></li>
                     </ul>
+                  </div>
+                  <div class="col-sm-9" >
+                    <div id="My_Projects" class="tab-content">
+                      <div class="tab-pane fade active in" id="hbc">
+                          <h5>Automatic Tech Week Scheduler</h5>
+
+                          <p>This project originated out of a personal need to automatic the tech week scheduling process as tech producer of the Harvard Ballet Company.</p>
+
+                          <h5>Algorithm</h5>
+
+                          <p>During fall semester of my junior year in college, I was tasked with the responsiblity of creating a weeklong rehearsal schedule that could accommodate the busy schedules of 20+ college students. I sat at my desk, writing up several drafts of the schedule and thinking how easily this task lent itself to being automated by a computer program.</p>
+
+                          <p>So for my CS182 final project, I decided to implement an algorithm that could produce the optimal tech week schedule automatically. You can read the full writeup <a href = "https://github.com/monicadsong/CS182-Final-Project/blob/master/CS182_Final_Project_Writeup%20(2).pdf"  target="_blank">here</a>. But pretty much, I formulated the problem as constraint scheduling problem and solved it using several different algorithms including heuristic-based depth-first search and simulated annealing.</p>
+
+                          <h5>Web Application</h5>
+
+                          <p>I knew I wanted other people (i.e. future tech producers) to use my program, so I created a web interface using Flask. Dancers can log in and input their availability for the week. Then, once all the information has been collected, tech producers can create a schedule with the simple click of a button.</p>
+
+                          <p> I also experimented with Amazon Web Services as a platform to host my web application for free. I <a href = "http://blog.monicasong.com/AWS-instance/" target = "_blank">transferred it to an Elastic Cloud instance</a>, where it can be accessed at IP address: http://34.207.173.18:5001.</p>
+
+                          <p><b>Github Repositories</b></p>
+                          <ul>
+                            <li><a href = "https://github.com/monicadsong/CS182-Final-Project" target = "_blank">Algorithm</a></li>
+                            <li><a href = "https://github.com/monicadsong/hbc-webapp" target = "_blank">Web Application</a></li>
+                          </ul>
+                      </div>
+                      <div class="tab-pane fade active in" id="cs109">
+
+                      </div>
+                    </div>
                   </div>
                 </div>
 

@@ -1,0 +1,15 @@
+<h2>Automatic Tech Week Scheduler</h2>
+
+<p>This project originated out of a personal need to automatic the tech week scheduling process as tech producer of the Harvard Ballet Company.</p>
+
+<h4>Algorithm</h4>
+
+<p>During fall semester of my junior year in college, I was tasked with the responsiblity of creating a weeklong rehearsal schedule that could accommodate the busy schedules of 20+ college students. I sat at my desk, writeing up severla draftsI made several drafts of this, before and thought how easy it would be to automate this process with a computer program.</p>
+
+<p>So for my CS182 final project, I decided to implement an algorithm that could produce the optimal tech week schedule automatically. You can read the full writeup here. But pretty much, I formulated the problem as constraint scheduling problem and solved it using several different algorithms including heuristic-based depth-first search and simulated annealing.</p>
+
+<h4>Web Application</h4>
+
+<p>I knew I wanted other people (i.e. future tech producers) to use my program, so I created a web interface using Flask. Dancers can log in and input their availability for the week. Then, once all the information has been collected, tech producers can create a schedule with the simple click of a button.</p>
+
+<p> I also experimented with Amazon Web Services as a platform to host my web application for free. I transferred it to an Elastic Cloud instance, where it can be accessed at IP address: . A simple overview of how I did that can be found here: </p>
