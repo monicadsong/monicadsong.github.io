@@ -11,14 +11,10 @@
 	</ul>
 </p>
 
-<p>So when it finally came down to submitting our project, we were only able to submit a model that was training on a very small (3000 data points) data set. </p>
+<p>So when it finally came down to submitting our project, we were only able to submit a model that was training on a very small (3000 data points) data set. Additionally, becuase our training data was so limited, our model was vastly overfitted and had a terrible accuracy rate of only around 30% on the test set.</p>
 
-<p>Later, when I had more time, I decided I wanted to revised this project. First, I optimized our data set by saving it as a HDF5 file to mitigate I/O problems. </p>
+<p>Later, when I had more time, I decided I wanted to revisit this project. First, I optimized our data set by saving it as a HDF5 file to mitigate I/O problems.</p>
 
-<p>I also worked to parallelize the training of the model. The paper itself stated that parallelizing the algorithm would be incredibly simple and upon doing more research, I found that it was indeed "embarassingly easy". I looked at this paper to figure out how to do it. </p>
+<p>I also worked to parallelize the training of the model. The paper itself stated that parallelizing the algorithm would be incredibly simple and upon doing more research, I found that it was indeed <a href = "https://en.wikipedia.org/wiki/Embarrassingly_parallel">"embarassingly easy"</a> to do. The process was also detailed in this paper.</p>
 
-<p>Using Python's multiprocessing functionality, I was able to parallelize the computation by calculating the inner product vectors for user onto different CPUs . </p>
-
-
-
-< 
+<p>Using Python's multiprocessing functionality, I was able to parallelize the computation by splitting the calculation of the inner product vectors for each user or item into 4 different processes. Coding-wise, this was extremely straightforward to do using the "pool" object in the multiprocessing module. Once I finished the program, I ran it on my own machine, and was able to achieve a accuracy rate of 80%.</p>
