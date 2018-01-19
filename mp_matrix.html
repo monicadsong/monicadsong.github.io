@@ -1,1 +1,24 @@
 <h2>Parallelizing Matrix Factorization</h2>
+
+<p>For my data science course, a group of 2 students and I completed a project involving restaurant recommendations involving <a href = "https://www.yelp.com/dataset/challenge">Yelp's academic dataset</a>.</p>
+
+<p>In order to predict user ratings, we followed the Alternating Least Squares method detailed in this popular paper:  </p>
+
+<p>However, we stumbled across several problems when running our code:
+	<ul>
+		<li>It took too long</li>
+		<li>The data set was too large</li>
+	</ul>
+</p>
+
+<p>So when it finally came down to submitting our project, we were only able to submit a model that was training on a very small (3000 data points) data set. </p>
+
+<p>Later, when I had more time, I decided I wanted to revised this project. First, I optimized our data set by saving it as a HDF5 file to mitigate I/O problems. </p>
+
+<p>I also worked to parallelize the training of the model. The paper itself stated that parallelizing the algorithm would be incredibly simple and upon doing more research, I found that it was indeed "embarassingly easy". I looked at this paper to figure out how to do it. </p>
+
+<p>Using Python's multiprocessing functionality, I was able to parallelize the computation by calculating the inner product vectors for user onto different CPUs . </p>
+
+
+
+< 
