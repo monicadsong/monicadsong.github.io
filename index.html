@@ -26,26 +26,6 @@
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
      })();
 
-    function pictureChange1()
-    {
-      document.getElementById("LogoPhoto").src="img/home.jpg";
-    }
-
-    function pictureChange2()
-    {
-      document.getElementById("LogoPhoto").src="img/about.jpg";
-    }
-
-    function pictureChange3()
-    {
-      document.getElementById("LogoPhoto").src="img/work.jpg";
-    }
-
-    function pictureChange4()
-    {
-      document.getElementById("LogoPhoto").src="img/misc.jpg";
-    }
-
 
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -56,9 +36,9 @@
           <div class="col-sm-6 col-sm-offset-3">
             <img src = "img/home.jpg" id = "LogoPhoto" class="img-circle" width="250" height="250">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#home" data-toggle="tab" onclick="pictureChange1()">Home</a></li>
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
                 <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" onclick="pictureChange3()" href="#Work">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#Work">
                     Work <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
@@ -70,7 +50,7 @@
                   </ul>
                 </li>
                 <li class="dropdown">
-                  <a class="dropdown-toggle" data-toggle="dropdown" onclick="pictureChange2()" href="#">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     Fun Stuff <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
