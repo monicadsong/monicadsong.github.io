@@ -32,156 +32,61 @@
   <body>
       <div class="container">
         <div class="jumbotron">
-          <h3 class="display-3">Hazardous Incident Prediction for Autonomous Vehicles</h3>
-          <h2>A Work in Progress (last updated February 4, 2019)</h2>
-          <p class="lead">An Undergraduate Thesis by Monica Song</p>
+          <h2 class="display-3">Hazardous Incident Prediction for Autonomous Vehicles</h2>
+          <h4>Last updated March 29, 2019</h4>
         </div>
-        <h3>0: Introduction</h3>
-        <div class="progress">
-          <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <p>I feel like much of the effort I've spent on this project will not be evident in the final product. 
-          So, this webpage here is meant to document my own progress and thought process as well as provide interested visitors a step-by-step 
-          guide of how I pursued this idea. Additionally, I'll write down some common mistakes I made, how-to's, etc. 
-          that I think will be helpful for my future self and others.  
-        </p> 
-        <p>
-          Also, I should say that this work is by my no means groundbreaking or original. My goal is to demonstrate a systematic
-          process for applying machine learning to industry problems, geared towards people who do not have an affinity for math, statistics,
-          or CS. I hope to demonstrate solid results in a truly beautiful way. 
-        </p>
-        <p>So if you haven't read the title yet, you should</p>
-        <h3>1: The Data</h3>
-        <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-
-        <p>The dataset is a corpus of around 350 videos scraped from Youtube -- all filmed from a car dashcam. Here are some example videos:
-        </p>
-
-        <p>Each video is eight seconds along, resulting in 240 frames per video when extracted at 30 fps.</p>
-        <p>Accompanying each video is a set of annotations:</p>
-        <ul> 
-          <li>Incident Start Time</li>
-          <li>Incident Cue</li>
-          <li>Event Start Time</li>
-          <li>Event Critical Time</li>
-          <li>Human Reaction Time</li>
-          <li>Human Response</li>
-        </ul>
-
-        <p>I was very lucky in that I got to work with a dataset with a lot of human-related annotations, which
-          lends itself to many interesting questions about the differences between human cognition and computer vision.
-          However, as of now, only one annotation really matters-- which is the <b>incident cue</b>.
-        </p>
-        <p>I want to acknowledge some limitations about this dataset:
-          <ul>
-            <li><b>Size:</b> For machine learning, 350 examples is very small. However, for statistical analysis, 350 videos is a lot.
-              So I would say that having concerns over the size of the dataset depends on your field. But, I do CS-- so this is definitely
-              a tiny dataset. 
-            </li> 
-            <li><b>Number of sensors (sources of data):</b> This dataset is simple; it only consists of video footage. For developing 
-              autonomous vehicle systems, typically people have access to a lot of features in the data-- such as GPS location, weather,
-              LIDAR data (proximity of other objects), time of day, velocity of vehicle, etc. Thus, the amount of information 
-              that the model receives is severely limited, presenting an interesting opportunity to apply machine learning to in information-scarce 
-              settings, which humans are quite good at operating in!  
-            </li>
-
-
-          </ul>
-        </p>
-        <p>The data was collected and annotated by Benjamin Wolfe and Ruth Rosenholtz. </p>
-
-        <h3>2: Baseline Model</h3>
-        <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        <p> For this model, I only used videos containing an incident (252 total). I split the data so that eaach video would have the same number of negative and positive-labeled frames, 
-          <b>resulting in a completely balanced dataset.</b>
-        </p>
-        <p> The model's function is very simple: it takes as input an image and outputs an probability of incident. It is a Resnet-18 
-          originally trained on Imagenet to classify images into 1000 categories, but I finetuned it to classify traffic scenes
-          into two categories (0 = no incident, 1 = incident). Like I said, easy-peasy. 
-        </p>
-
+        <h3>Test Set Evaluation</h3>
+        <span class="badge badge-danger">RNN</span>
+        <span class="badge badge-primary">LLFC</span>
+        <span class="badge badge-success">BasicNet</span>
         
-        <h3>3: Data Analysis Part I</h3>
-        <div class="progress">
-            <div class="progress-bar bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <h5>Video 2</h5>
+              <video width="320" controls>
+                <source src="good/stack_2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
 
-        <h4>Model Scores</h4>
-        <div class="row justify-content-md-center">
-        <div class="col-md-auto">
-        <table class="table table-hover">
-            <tr>
-              <th></th>
-              <th>Actual: +</th> 
-              <th>Actual: -</th>
-            </tr>
-            <tr>
-              <th>Predicted: + </th>
-              <td>1544</td> 
-              <td>1015</td>
-            </tr>
-            <tr>
-              <th>Predicted: -</th>
-              <td>1227</td> 
-              <td>1332</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><b>TPR:</b> 0.56</td> 
-                <td><b>TNR:</b> 0.57</td>
-              </tr>
-          </table>
-        </div>
-        <div class="col col-lg-2">
-          <ul class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Accuracy
-                <span>0.56</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Precision
-                <span>0.60</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                Recall
-                <span>0.56</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                  F-Score
-                  <span>0.58</span>
-              </li>
-            </ul>
+              <h5>Video 9</h5>
+              <video width="320" controls>
+                <source src="good/stack_9.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+
+
+            </div>
+            <div class="col-sm">
+              <h5>Video 5</h5>
+              <video width="320" controls>
+                <source src="good/stack_5.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+              <h5>Video 11</h5>
+              <video width="320" controls>
+                <source src="good/stack_11.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+
+            </div>
+            <div class="col-sm">
+              <h5>Video 8</h5>
+              <video width="320" controls>
+                <source src="good/stack_8.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+              <h5>Video 18</h5>
+              <video width="320" controls>
+                <source src="good/stack_18.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>
-        <p> So, right off the bat, my model did <i>slightly better than average.</i> (And not by chance, since I cross-validated
-          and consistently got an accuracy rate of 0.57.)
-          </p>
-        <p> So, it is quite evident that this data is a time series and even exhibits trends. Now, I haven't really
-          studied time series analysis that much (i.e. didn't take the course Stat131 here at Harvard), only read up on it 
-        </p>
 
-        <p> Here I do something quite interesting: and then it is </p>
-        <p>This baseline model had . Furthermore, it did a good job of localizing of the incident in these cam videos
-
-          Now the question I want to answer: without using recurrency in the deep learning model, how can I incorporate statistical
-          techniques to these independent frame-wise scores to get some sense of time and motion? 
-        </p> 
-        <h4>The Need for Recurrency?</h4>
-        <p> Some statistical techniques: smoothing (Gaussian, interframe agreement, along with some conditional probability, applying a Kalman Filter
-          Unfortunately, the model is vastly overfit-- which means 
-
-        </p>
-
-
-  
-
-      
-
+       
+        
 
       </div>
       
