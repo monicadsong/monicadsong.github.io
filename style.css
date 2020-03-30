@@ -48,10 +48,14 @@ ul {
   color:#f0ecd1;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  list-style-type: none;
+  /* list-style-type: none; */
+  margin-left: 40px;
   padding: 0;
 }
-
+#writing {
+  margin-left: 0px;
+  list-style-type: none;
+}
 
 #date {
   opacity: 0.5;
