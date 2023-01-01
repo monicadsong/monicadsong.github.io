@@ -9,28 +9,27 @@ body {
 }
 
 p {
-  color:#b4d1b9;
+  color:#9dc7b0;
   font-family: "Roboto", sans-serif;
   font-weight: 350;
 }
 
 
 a {
-  color:#b4d1b9;
+  color:#9dc7b0;
   text-decoration: underline;
 }
 
 a:hover {
-  color:#b2dbb9;
+  color:#b4cfbf;
 }
 
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'PT Serif', serif;
   font-weight: 400;
-  color:#b2dbb9;
+  color:#9dc7b0;
 }
-
 h1 {
   margin-bottom: 40px;
 }
@@ -61,7 +60,7 @@ hr {
 }
 
 .footer p {
-  color:#b2dbb9;   
+  color:#9dc7b0;   
   font-weight: 300;   
 }
 
